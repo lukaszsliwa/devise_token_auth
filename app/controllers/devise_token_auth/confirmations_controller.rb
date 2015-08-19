@@ -19,7 +19,8 @@ module DeviseTokenAuth
 
         yield if block_given?
 
-        redirect_to(@resource.build_auth_url(params[:redirect_url], {
+        redirect_url = params[:redirect_url] || DeviseTokenAuth.default_confirm_success_url
+        redirect_to(@resource.build_auth_url(redirect_url, {
           token:                        token,
           client_id:                    client_id,
           account_confirmation_success: true,
